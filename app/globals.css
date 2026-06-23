@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Quicksand", sans-serif;
+  --font-script: "Dancing Script", cursive;
+}
+
+@layer base {
+  body {
+    @apply font-body text-blush-700/90;
+    background-color: #faf5ec;
+    /* layered paper + soft warm-sand glow */
+    background-image:
+      radial-gradient(
+        circle at 15% 12%,
+        rgba(216, 189, 126, 0.20),
+        transparent 42%
+      ),
+      radial-gradient(
+        circle at 85% 8%,
+        rgba(197, 182, 163, 0.22),
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 50% 100%,
+        rgba(176, 138, 95, 0.14),
+        transparent 55%
+      );
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  /* faint paper grain laid over everything */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  }
+}
+
+@layer components {
+  /* a sheet of enchanted parchment */
+  .paper {
+    @apply relative rounded-2xl border border-parchment-200 bg-parchment-50 shadow-paper;
+    background-image:
+      linear-gradient(rgba(255, 253, 248, 0.7), rgba(251, 244, 230, 0.7)),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 30px,
+        rgba(200, 160, 120, 0.05) 31px
+      );
+  }
+
+  .gilt-text {
+    background: linear-gradient(
+      100deg,
+      #9a7d3c,
+      #c0a056,
+      #f1e6c8,
+      #c0a056,
+      #9a7d3c
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    @apply animate-shimmer;
+  }
+
+  .btn-magic {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5
+           font-medium text-white transition-all duration-200
+           bg-gradient-to-r from-blush-500 to-blush-400
+           shadow-paper hover:shadow-paper-lg hover:-translate-y-0.5
+           active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2
+           font-medium text-blush-600 bg-white/60 border border-blush-200
+           transition-all duration-200 hover:bg-white hover:border-blush-300;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1
+           text-xs font-semibold tracking-wide;
+  }
+
+  .input-magic {
+    @apply w-full rounded-xl border border-parchment-200 bg-white/80 px-4 py-2.5
+           text-blush-700 placeholder:text-blush-300 outline-none transition
+           focus:border-blush-400 focus:ring-2 focus:ring-blush-200;
+  }
+
+  .label-magic {
+    @apply mb-1.5 block font-display text-lg font-medium text-blush-600;
+  }
+}
+
+/* prettier scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(176, 138, 95, 0.35);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
